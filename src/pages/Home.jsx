@@ -7,6 +7,11 @@ import Banner from "../assets/Images/banner.mp4";
 import CodeBloks from "../components/core/HomePage/CodeBloks";
 import TimelineSection from "../components/core/HomePage/TimelineSection";
 import LearningLanguageSection from "../components/core/HomePage/LearningLanguageSection";
+import InstructorSection from "../components/core/HomePage/InstructorSection";
+import { MdOutlineRateReview } from "react-icons/md";
+import Footer from "../components/common/Footer";
+import ExploreMore from "../components/core/HomePage/ExploreMore";
+
 export default function Home() {
   return (
     <div>
@@ -109,36 +114,27 @@ export default function Home() {
               linkto: "/login",
               active: false,
             }}
-            codeblock={`import React, { useState, useEffect } from 'react';
-
-function MovingText() {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCount(prev => prev + 1);
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
+            codeblock={`import React from "react";
+import { TypeAnimation } from "react-type";
+export default function Home() {
   return (
-    <div>
-      <h1>React Counter: {count}</h1>
-      <p>Watch this number increase every second!</p>
-    </div>
+    <TypeAnimation
+      sequence={["Welcome to React 🚀", 1000, "Learn. Build. Grow. 🌱", 1000]}
+      repeat={Infinity}
+    />
   );
-}
-
-export default MovingText;`}
+}`}
             codeColor={"text-green-300"}
             backgroundGradient={"code-block1-grad"}
           />
         </div>
+
+        <ExploreMore/>
       </div>
 
       {/*Section 2 */}
 
-      <div className="bg-gray-200 text-black">
+      <div className="bg-gray-200 text-black mt-10">
         <div className="homepage_bg h-[310px]">
           <div className="w-11/12 max-w-[1200px] flex flex-col items-center justify-between gap-5 mx-auto">
             <div className="h-[150px]"></div>
@@ -156,12 +152,40 @@ export default MovingText;`}
           </div>
         </div>
 
-        <div>
-          
+        <div className="mx-auto w-11/12 max-w-[1200px] flex flex-col items-center justify-between gap-7">
+          <div className="flex flex-row gap-5 mb-10 mt-[95px]">
+            <div className="text-4xl font-semibold w-[45%]">
+              Get the skill you need for a
+              <HighlightText text={"Job that is in demand"} />
+            </div>
+
+            <div className="flex flex-col gap-10 w-[40%] items-start">
+              <div className="text-[16px]">
+                The modern StudyNotion is the dictates its own term. Today, to
+                be a competitive specialist requires more than professional
+                skill.
+              </div>
+              <CTAButton active={true} linkto={"/signup"}>
+                <div>Learn more</div>
+              </CTAButton>
+            </div>
+          </div>
+          <TimelineSection />
+          <LearningLanguageSection />
         </div>
       </div>
 
       {/*Section 3 */}
+      <div className="mt-14 w-11/12 mx-auto max-w-[1200px] flex-col items-center justify-between gap-8 first-letter bg-black text-white">
+        <InstructorSection />
+        <h1 className="text-center text-3xl lg:text-4xl font-semibold mt-8 flex justify-center items-center gap-x-3">
+          Reviews from other learners{" "}
+          <MdOutlineRateReview className="text-amber-200" />
+        </h1>
+      </div>
+
+      {/*Footer */}
+      <Footer/>
     </div>
   );
 }
