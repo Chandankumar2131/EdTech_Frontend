@@ -12,7 +12,9 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.9.0",
     "@tailwindcss/vite": "^4.1.13",
+    "axios": "^1.12.2",
     "browser-router": "^0.2.0",
+    "dotenv": "^17.2.2",
     "framer-motion": "^12.23.18",
     "motion": "^12.23.18",
     "motion-dom": "^12.23.18",
