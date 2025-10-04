@@ -1,0 +1,108 @@
+import { useEffect, useState } from "react";
+import OtpInput from "react-otp-input";
+import { Link } from "react-router";
+import { BiArrowBack } from "react-icons/bi";
+import { RxCountdownTimer } from "react-icons/rx";
+import { useDispatch, useSelector } from "react-redux";
+import { sendOtp, signUp } from "../services/operations/authAPI";
+import { useNavigate } from "react-router";
+import Loading from './../components/common/Loading';
+
+function VerifyEmail() {
+  const [otp, setOtp] = useState("");
+  const { signupData, loading } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!signupData) {
+      navigate("/signup");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleVerifyAndSignup = (e) => {
+    e.preventDefault();
+    const { accountType, firstName, lastName, email, password, confirmPassword } = signupData;
+
+    dispatch(
+      signUp(
+        accountType,
+        firstName,
+        lastName,
+        email,
+        password,
+        confirmPassword,
+        otp,
+        navigate
+      )
+    );
+  };
+
+  return (
+    <div className="min-h-[calc(100vh-3.5rem)] grid place-items-center">
+      {loading ? (
+        <Loading />
+      ) : (
+        <div className="max-w-[500px] p-4 lg:p-8">
+          <h1 className="text-white font-semibold text-3xl leading-tight">
+            Verify Email
+          </h1>
+
+          <p className="text-lg leading-relaxed my-4 text-gray-300">
+            A verification code has been sent to you. Enter the code below
+          </p>
+
+          <form onSubmit={handleVerifyAndSignup}>
+            <OtpInput
+              value={otp}
+              onChange={setOtp}
+              numInputs={6}
+              renderInput={(props) => (
+                <input
+                  {...props}
+                  placeholder="-"
+                  style={{
+                    boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
+                  }}
+                  className="w-12 lg:w-14 border-0 bg-gray-800 rounded-md text-white aspect-square text-center focus:border-0 focus:outline-2 focus:outline-yellow-400"
+                />
+              )}
+              containerStyle={{
+                justifyContent: "space-between",
+                gap: "0 6px",
+              }}
+            />
+
+            <button
+              type="submit"
+              className="w-full bg-yellow-400 py-3 px-3 rounded-md mt-6 font-medium text-black"
+            >
+              Verify Email
+            </button>
+          </form>
+
+          <div className="mt-6 flex items-center justify-between">
+            <Link to="/signup">
+              <p className="text-white flex items-center gap-x-2">
+                <BiArrowBack /> Back To Signup
+              </p>
+            </Link>
+
+            <button
+              className="flex items-center text-blue-400 gap-x-2"
+              onClick={() => (
+                dispatch(sendOtp(signupData.email, navigate)), setOtp("")
+              )}
+            >
+              <RxCountdownTimer />
+              Resend it
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default VerifyEmail;

@@ -84,7 +84,7 @@ export function signUp(accountType, firstName, lastName, email, password, confir
 
 // ================ Login ================
 export function login(email, password, navigate) {
-  return async (dispatch) => {
+  return async (dispatch) => { 
 
     const toastId = toast.loading("Loading...");
     dispatch(setLoading(true));
@@ -147,7 +147,7 @@ export function getPasswordResetToken(email, setEmailSent) {
     } catch (error) {
       console.log("RESET PASS TOKEN ERROR............", error)
       toast.error(error.response?.data?.message)
-      // toast.error("Failed To Send Reset Email")
+      toast.error("Failed To Send Reset Email")
     }
     toast.dismiss(toastId)
     dispatch(setLoading(false))
