@@ -74,8 +74,8 @@ export const contactusEndpoint = {
 
 // SETTINGS PAGE API
 export const settingsEndpoints = {
-  UPDATE_DISPLAY_PICTURE_API: BASE_URL + "/profile/updateUserProfileImage",
-  UPDATE_PROFILE_API: BASE_URL + "/profile/updateProfile",
-  CHANGE_PASSWORD_API: BASE_URL + "/auth/changepassword",
-  DELETE_PROFILE_API: BASE_URL + "/profile/deleteProfile",
-}
+  UPDATE_DISPLAY_PICTURE_API: BASE_URL + "/profile/upload-profile-picture",
+  UPDATE_PROFILE_API: BASE_URL + "/profile/update",
+  CHANGE_PASSWORD_API: BASE_URL + "/profile/update-password",
+  DELETE_PROFILE_API: BASE_URL + "/profile/delete",
+} 

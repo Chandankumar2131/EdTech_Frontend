@@ -28,7 +28,7 @@ const cartSlice = createSlice({
         resetCart(state) {
             state.totalItems = 0;
             localStorage.setItem("totalItems", JSON.stringify(state.totalItems));
-            toast.success("Cart reset successfully");   
+            // toast.success("Cart reset successfully");   
 
     },          
 },

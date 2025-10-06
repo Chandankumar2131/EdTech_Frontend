@@ -8,9 +8,13 @@ import Login from "./pages/Login";
 import ForgotPassword from "./pages/ForgotPassword";
 import OpenRoute from "./components/core/Auth/OpenRoute";
 import UpdatePassword from "./pages/UpdatePassword";
-import VarifyEmail from "./pages/VerifyEmail"
+import VarifyEmail from "./pages/VerifyEmail";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import Dashboard from "./pages/Dashboard";
+import ProtectedRoute from "./components/core/Auth/ProtectedRoute";
+import MyProfile from "./components/core/Dashboard/MyProfile";
+import Settings from "./components/core/Dashboard/Settings/Settings";
 export default function App() {
   return (
     <div className="w-screen min-h-screen bg-gray-950 flex flex-col">
@@ -27,13 +31,12 @@ export default function App() {
               <ForgotPassword />
             </OpenRoute>
           }
-          
         />
         <Route
           path="/update-password/:id"
           element={
             <OpenRoute>
-              <UpdatePassword/>
+              <UpdatePassword />
             </OpenRoute>
           }
         />
@@ -41,27 +44,41 @@ export default function App() {
           path="/verify-email"
           element={
             <OpenRoute>
-             <VarifyEmail />
+              <VarifyEmail />
             </OpenRoute>
           }
         />
-         <Route
+        <Route
           path="/about"
           element={
             <OpenRoute>
-             <About/>
+              <About />
             </OpenRoute>
           }
         />
-         <Route
+        <Route
           path="/contact"
           element={
             <OpenRoute>
-             <Contact/>
+              <Contact />
             </OpenRoute>
           }
         />
 
+
+        {/* Protected Route - for Only Logged in User */}
+        {/* Dashboard */}
+        <Route element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        }
+        >
+          <Route path="dashboard/my-profile" element={<MyProfile />} />
+          <Route path="dashboard/Settings" element={<Settings/>} />
+          </Route>
+
+ 
       </Routes>
     </div>
   );
