@@ -1,7 +1,7 @@
 import { toast } from "react-hot-toast"
 
 import { setUser } from "../../slices/profileSlice"
-import { apiConnector } from "../apiconnector"
+import { apiConnector } from "../apiConnector"
 import { settingsEndpoints } from "../apis"
 import { logout } from "./authAPI"
 
@@ -24,9 +24,9 @@ export function updateUserProfileImage(token, formData) {
         "PUT",
         UPDATE_DISPLAY_PICTURE_API,
         formData,
-        {
-          Authorization: `Bearer ${token}`,
-        }
+       {
+  Authorization: `Bearer ${token}`,
+}
       )
       console.log("UPDATE_DISPLAY_PICTURE_API API RESPONSE............", response);
 
@@ -50,34 +50,45 @@ export function updateUserProfileImage(token, formData) {
 // ================ update Profile  ================
 export function updateProfile(token, formData) {
   return async (dispatch) => {
-    // console.log('This is formData for updated profile -> ', formData)
-    const toastId = toast.loading("Loading...")
+    const toastId = toast.loading("Loading...");
     try {
       const response = await apiConnector("PUT", UPDATE_PROFILE_API, formData, {
         Authorization: `Bearer ${token}`,
-      })
-      console.log("UPDATE_PROFILE_API API RESPONSE............", response)
+      });
+      console.log("UPDATE_PROFILE_API API RESPONSE............", response);
 
       if (!response.data.success) {
-        throw new Error(response.data.message)
+        throw new Error(response.data.message);
       }
-      const userImage = response.data?.updatedUserDetails?.image
-        ? response.data.updatedUserDetails?.image
-        : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.updatedUserDetails.firstName} ${response.data.updatedUserDetails.lastName}`
 
-      dispatch(setUser({ ...response.data.updatedUserDetails, image: userImage }))
+      const updatedProfile = response.data.profileDetails;
 
-   
-      // console.log('DATA = ', data)
-      localStorage.setItem("user", JSON.stringify({ ...response.data.updatedUserDetails, image: userImage }));
-      toast.success("Profile Updated Successfully")
+      // ✅ get current user from localStorage
+      const user = JSON.parse(localStorage.getItem("user"));
+
+      // ✅ compute image fallback
+      const userImage = updatedProfile?.image
+        ? updatedProfile.image
+        : `https://api.dicebear.com/5.x/initials/svg?seed=${user?.firstName} ${user?.lastName}`;
+
+      // ✅ update redux store
+      dispatch(setUser({ ...user, additionalDetails: updatedProfile, image: userImage }));
+
+      // ✅ update localStorage
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ ...user, additionalDetails: updatedProfile, image: userImage })
+      );
+
+      toast.success("Profile Updated Successfully");
     } catch (error) {
-      console.log("UPDATE_PROFILE_API API ERROR............", error)
-      toast.error("Could Not Update Profile")
+      console.log("UPDATE_PROFILE_API API ERROR............", error);
+      toast.error("Could Not Update Profile");
     }
-    toast.dismiss(toastId)
-  }
+    toast.dismiss(toastId);
+  };
 }
+
 
 
 // ================ change Password  ================

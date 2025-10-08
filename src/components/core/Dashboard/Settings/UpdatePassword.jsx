@@ -80,7 +80,7 @@ export default function UpdatePassword() {
                 type={showNewPassword ? "text" : "password"}
                 name="newPassword"
                 id="newPassword"
-                placeholder="Enter New Password"
+                placeholder="Enter New newPassword"
                 className="w-full rounded-md border border-gray-600 bg-gray-800 py-2 px-3 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 {...register("newPassword", { required: true })}
               />
@@ -105,17 +105,17 @@ export default function UpdatePassword() {
 
             {/* Confirm New Password */}
             <div className="relative flex flex-col gap-2 w-full lg:w-1/2">
-              <label htmlFor="confirmNewPassword" className="text-sm font-medium text-gray-200">
+              <label htmlFor="confirmPassword" className="text-sm font-medium text-gray-200">
                 Confirm New Password
               </label>
 
               <input
                 type={showConfirmNewPassword ? "text" : "password"}
-                name="confirmNewPassword"
-                id="confirmNewPassword"
+                name="confirmPassword"
+                id="confirmPassword"
                 placeholder="Enter Confirm New Password"
                 className="w-full rounded-md border border-gray-600 bg-gray-800 py-2 px-3 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                {...register("confirmNewPassword", { required: true })}
+                {...register("confirmPassword", { required: true })}
               />
 
               <span
