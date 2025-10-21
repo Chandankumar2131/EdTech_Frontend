@@ -43,7 +43,7 @@ export default function DeleteAccount() {
 
             <button
               type="button"
-              className="italic text-pink-300 hover:text-pink-400 transition-colors"
+              className="italic rounded-xl cursor-pointer text-pink-300 hover:text-pink-400 transition-colors"
               onClick={() => check &&
                 setConfirmationModal({
                   text1: "Are you sure?",
