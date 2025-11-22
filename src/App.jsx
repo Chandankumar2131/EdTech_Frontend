@@ -18,8 +18,12 @@ import Settings from "./components/core/Dashboard/Settings/Settings";
 import EnrolledCourses from "./components/core/Dashboard/EnrolledCourses";
 import Cart from "./components/core/Dashboard/Cart/Cart";
 // import StudentRoute from "./components/core/Auth/StudentRoute";
+import { ACCOUNT_TYPE } from "./utils/constants";
+import { useSelector } from "react-redux";
+import AddCourse from "./components/core/Dashboard/AddCourse/AddCourse";
 
 export default function App() {
+  const { user } = useSelector((state) => state.profile)
   return (
     <div className="w-screen min-h-screen bg-gray-950 flex flex-col">
       <Navbar />
@@ -27,7 +31,7 @@ export default function App() {
         {/* Public routes */}
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login />} />  
         <Route
           path="/forgot-password"
           element={
@@ -69,21 +73,47 @@ export default function App() {
           }
         />
 
-        {/* Protected Dashboard routes */}
-        <Route
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
+         {/* Protected Route - for Only Logged in User */}
+        {/* Dashboard */}
+        <Route element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        }
         >
           <Route path="dashboard/my-profile" element={<MyProfile />} />
-          <Route path="dashboard/settings" element={<Settings />} />
+          <Route path="dashboard/Settings" element={<Settings />} />
 
-          {/* Student-only routes */}
-          <Route path="dashboard/enrolled-courses"element={<EnrolledCourses />}
-          />
-          <Route path="dashboard/cart" element={<Cart />} />
+          {/* Route only for Admin */}
+          {/* create category, all students, all instructors */}
+          {user?.accountType === ACCOUNT_TYPE.ADMIN && (
+            <>
+              <Route path="dashboard/create-category" element={<CreateCategory />} />
+              <Route path="dashboard/all-students" element={<AllStudents />} />
+              <Route path="dashboard/all-instructors" element={<AllInstructors />} />
+            </>
+          )}
+
+
+          {/* Route only for Students */}
+          {/* cart , EnrolledCourses */}
+          {user?.accountType === ACCOUNT_TYPE.STUDENT && (
+            <>
+              <Route path="dashboard/cart" element={<Cart />} />
+              <Route path="dashboard/enrolled-courses" element={<EnrolledCourses />} />
+            </>
+          )}
+
+          {/* Route only for Instructors */}
+          {/* add course , MyCourses, EditCourse*/}
+          {user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
+            <>
+              {/* <Route path="dashboard/instructor" element={<Instructor />} /> */}
+              <Route path="dashboard/add-course" element={<AddCourse/>} />
+              {/* <Route path="dashboard/my-courses" element={<MyCourses />} /> */}
+              {/* <Route path="dashboard/edit-course/:courseId" element={<EditCourse />} /> */}
+            </>
+          )}
         </Route>
       </Routes>
     </div>
