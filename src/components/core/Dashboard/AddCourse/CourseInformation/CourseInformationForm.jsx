@@ -127,7 +127,7 @@ export default function CourseInformationForm() {
     }
 
     const formData = new FormData();
-    formData.append("courseName", data.courseTitle);
+    formData.append("courseName", data .courseTitle);
     formData.append("courseDescription", data.courseShortDesc);
     formData.append("price", data.coursePrice);
     formData.append("tag", JSON.stringify(data.courseTags));
