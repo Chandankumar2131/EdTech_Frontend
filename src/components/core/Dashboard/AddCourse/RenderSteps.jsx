@@ -3,6 +3,7 @@ import { FaCheck } from "react-icons/fa"
 import { useSelector } from "react-redux"
 
 import CourseInformationForm from "./CourseInformation/CourseInformationForm"
+import CourseBuilderForm from "./CourseBuilder/CourseBuilderForm"
 
 export default function RenderSteps() {
 
@@ -17,7 +18,7 @@ export default function RenderSteps() {
 
   return (
     <>
-      <div className="relative mb-2 flex w-full select-none justify-center ">
+      <div className="relative mb-2 flex w-full select-none justify-center">
         {steps.map((item) => (
           <React.Fragment key={item.id}>
             <div className="flex flex-col items-center ">
@@ -63,6 +64,7 @@ export default function RenderSteps() {
       </div>
 
       {step === 1 && <CourseInformationForm />}
+        {step === 2 && <CourseBuilderForm/>}
     </>
   )
 }

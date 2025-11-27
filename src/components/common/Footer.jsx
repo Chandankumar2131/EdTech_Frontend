@@ -170,7 +170,7 @@ const Footer = () => {
                 Chandan Kumar
               </Link>
             </div>
-            <span className="text-gray-400"> © 2023 Studynotion</span>
+            <span className="text-gray-400"> © 2025 Studynotion</span>
           </div>
 
           {/* Social */}
