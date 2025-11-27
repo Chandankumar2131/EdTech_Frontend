@@ -36,7 +36,7 @@ export const courseEndpoints = {
   GET_ALL_COURSE_API: BASE_URL + "/course/getAllCourses",
   COURSE_DETAILS_API: BASE_URL + "/course/getCourseDetails",
   EDIT_COURSE_API: BASE_URL + "/course/course/edit",
-  COURSE_CATEGORIES_API: "https://edtech-backend-8afs.onrender.com/course/category/get-all",
+  COURSE_CATEGORIES_API: "https://edtech-backend-8afs.onrender.com/api/v1/course/category/get-all",
   CREATE_COURSE_API: BASE_URL + "/course/course/create",
   CREATE_SECTION_API: BASE_URL + "/course/section/create",
   CREATE_SUBSECTION_API: BASE_URL + "/course/subsection/create",
