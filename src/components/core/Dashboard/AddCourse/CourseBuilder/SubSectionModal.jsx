@@ -116,94 +116,102 @@ export default function SubSectionModal({
   };
 
   return (
-    <div className="fixed inset-0 z-[1000] grid h-screen w-screen place-items-center overflow-auto bg-white bg-opacity-10 backdrop-blur-sm">
-      <div className="my-10 w-11/12 max-w-[700px] rounded-lg border border-richblack-400 bg-richblack-800">
-        {/* Modal Header */}
-        <div className="flex items-center justify-between rounded-t-lg bg-richblack-700 p-5">
-          <p className="text-xl font-semibold text-richblack-5">
-            {view && "Viewing"} {add && "Adding"} {edit && "Editing"} Lecture
-          </p>
-          <button onClick={() => (!loading ? setModalData(null) : {})}>
-            <RxCross2 className="text-2xl text-richblack-5" />
-          </button>
-        </div>
-        {/* Modal Form */}
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 px-8 py-10">
-          {/* Lecture Video Upload */}
-          <Upload
-            name="lectureVideo"
-            label="Lecture Video"
-            register={register}
-            setValue={setValue}
-            errors={errors}
-            video={true}
-            viewData={view ? modalData.videoUrl : null}
-            editData={edit ? modalData.videoUrl : null}
-          />
+    <div className="fixed inset-0 z-[1000] grid h-screen w-screen place-items-center overflow-auto bg-slate-700 bg-opacity-10 backdrop-blur-sm">
+  <div className="my-10 w-11/12 max-w-[700px] rounded-lg border border-slate-500 bg-slate-900">
+    
+    {/* Modal Header */}
+    <div className="flex items-center justify-between rounded-t-lg bg-slate-800 p-5">
+      <p className="text-xl font-semibold text-gray-50">
+        {view && "Viewing"} {add && "Adding"} {edit && "Editing"} Lecture
+      </p>
 
-          {/* Lecture Title */}
-          <div className="flex flex-col space-y-2">
-            <label className="text-sm text-richblack-5" htmlFor="lectureTitle">
-              Lecture Title {!view && <sup className="text-pink-200">*</sup>}
-            </label>
-            <input
-              disabled={view || loading}
-              id="lectureTitle"
-              placeholder="Enter Lecture Title"
-              {...register("lectureTitle", { required: true })}
-              className="form-style w-full"
-            />
-            {errors.lectureTitle && (
-              <span className="ml-2 text-xs tracking-wide text-pink-200">
-                Lecture title is required
-              </span>
-            )}
-          </div>
-
-          {/* Lecture Description */}
-          <div className="flex flex-col space-y-2">
-            <label className="text-sm text-richblack-5" htmlFor="lectureDesc">
-              Lecture Description {!view && <sup className="text-pink-200">*</sup>}
-            </label>
-            <textarea
-              disabled={view || loading}
-              id="lectureDesc"
-              placeholder="Enter Lecture Description"
-              {...register("lectureDesc", { required: true })}
-              className="form-style resize-x-none min-h-[130px] w-full"
-            />
-            {errors.lectureDesc && (
-              <span className="ml-2 text-xs tracking-wide text-pink-200">
-                Lecture Description is required
-              </span>
-            )}
-          </div>
-
-          {/* Time Duration */}
-          {!view && (
-            <div className="flex flex-col space-y-2">
-              <label className="text-sm text-richblack-5" htmlFor="timeDuration">
-                Time Duration (mm:ss)
-              </label>
-              <input
-                id="timeDuration"
-                placeholder="00:00"
-                {...register("timeDuration")}
-                className="form-style w-full"
-              />
-            </div>
-          )}
-
-          {!view && (
-            <div className="flex justify-end">
-              <IconBtn
-                disabled={loading}
-                text={loading ? "Loading.." : edit ? "Save Changes" : "Save"}
-              />
-            </div>
-          )}
-        </form>
-      </div>
+      <button onClick={() => (!loading ? setModalData(null) : {})}>
+        <RxCross2 className="text-2xl text-gray-50" />
+      </button>
     </div>
+
+    {/* Modal Form */}
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 px-8 py-10">
+
+      <Upload
+        name="lectureVideo"
+        label="Lecture Video"
+        register={register}
+        setValue={setValue}
+        errors={errors}
+        video={true}
+        viewData={view ? modalData.videoUrl : null}
+        editData={edit ? modalData.videoUrl : null}
+      />
+
+      {/* Lecture Title */}
+      <div className="flex flex-col space-y-2">
+        <label className="text-sm text-gray-50" htmlFor="lectureTitle">
+          Lecture Title {!view && <sup className="text-pink-300">*</sup>}
+        </label>
+
+        <input
+          disabled={view || loading}
+          id="lectureTitle"
+          placeholder="Enter Lecture Title"
+          {...register("lectureTitle", { required: true })}
+          className="form-style w-full text-white bg-slate-800"
+        />
+
+        {errors.lectureTitle && (
+          <span className="ml-2 text-xs tracking-wide text-pink-300">
+            Lecture title is required
+          </span>
+        )}
+      </div>
+
+      {/* Lecture Description */}
+      <div className="flex flex-col space-y-2">
+        <label className="text-sm text-gray-50" htmlFor="lectureDesc">
+          Lecture Description {!view && <sup className="text-pink-300">*</sup>}
+        </label>
+
+        <textarea
+          disabled={view || loading}
+          id="lectureDesc"
+          placeholder="Enter Lecture Description"
+          {...register("lectureDesc", { required: true })}
+          className="form-style resize-x-none min-h-[130px] w-full text-amber-50 bg-slate-800"
+        />
+
+        {errors.lectureDesc && (
+          <span className="ml-2 text-xs tracking-wide text-pink-300">
+            Lecture Description is required
+          </span>
+        )}
+      </div>
+
+      {/* Time Duration */}
+      {!view && (
+        <div className="flex flex-col space-y-2">
+          <label className="text-sm text-gray-50" htmlFor="timeDuration">
+            Time Duration (mm:ss)
+          </label>
+
+          <input
+            id="timeDuration"
+            placeholder="00:00"
+            {...register("timeDuration")}
+            className="form-style w-full text-amber-50 bg-slate-800"
+          />
+        </div>
+      )}
+
+      {!view && (
+        <div className="flex justify-end">
+          <IconBtn
+            disabled={loading}
+            text={loading ? "Loading.." : edit ? "Save Changes" : "Save"}
+          />
+        </div>
+      )}
+    </form>
+  </div>
+</div>
   );
 }
