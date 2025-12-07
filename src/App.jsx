@@ -22,7 +22,9 @@ import { ACCOUNT_TYPE } from "./utils/constants";
 import { useSelector } from "react-redux";
 import AddCourse from "./components/core/Dashboard/AddCourse/AddCourse";
 import MyCourses from "./components/core/Dashboard/MyCourses";
-
+import EditCourse from "./components/core/Dashboard/EditCourse/EditCourse";
+import Catalog from "./pages/Catalog";
+import CourseDetails from "./pages/CourseDetails";
 export default function App() {
   const { user } = useSelector((state) => state.profile)
   return (
@@ -33,6 +35,8 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />  
+          <Route path="catalog/:catalogName" element={<Catalog/>} />
+           <Route path="courses/:courseId" element={<CourseDetails/>} />
         <Route
           path="/forgot-password"
           element={
@@ -113,7 +117,7 @@ export default function App() {
               <Route path="dashboard/add-course" element={<AddCourse/>} />
               <Route path="dashboard/my-courses" element={<MyCourses/>} />
               {/* <Route path="dashboard/my-courses" element={<MyCourses />} /> */}
-              {/* <Route path="dashboard/edit-course/:courseId" element={<EditCourse />} /> */}
+              <Route path="dashboard/edit-course/:courseId" element={<EditCourse/>} />
             </>
           )}
         </Route>

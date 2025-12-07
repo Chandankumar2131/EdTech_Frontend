@@ -23,34 +23,44 @@ export default function MyCourses() {
     fetchCourses();
   }, [token]);
 
-  // Scroll to top on mount
+  console.log("chandan from fetch course details:",courses[0]?.courseContent?.[0]?.subSection?.[0]?.timeDuration);
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
-    <div className="px-4 md:px-8 lg:px-16">
-      <div className="mb-14 flex flex-col lg:flex-row justify-between items-center gap-4">
-        <h1 className="text-4xl font-medium text-gray-100 font-boogaloo text-center lg:text-left">
+    <div className="px-3 sm:px-4 md:px-8 lg:px-16 w-full overflow-x-hidden">
+      
+      {/* Header Responsive */}
+      <div className="mb-10 flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-medium text-gray-100 font-boogaloo">
           My Courses
         </h1>
-        <IconBtn
-          text="Add Course"
-          onClick={() => navigate("/dashboard/add-course")}
-        >
-          <VscAdd />
-        </IconBtn>
+
+        <div className="w-full sm:w-auto flex justify-center sm:justify-end">
+          <IconBtn
+            text="Add Course"
+            onClick={() => navigate("/dashboard/add-course/basic-details")}
+            className="w-full sm:w-auto"
+          >
+            <VscAdd />
+          </IconBtn>
+        </div>
       </div>
 
-      {/* Courses Table */}
-      {courses && (
-        <CoursesTable
-          courses={courses}
-          setCourses={setCourses}
-          loading={loading}
-          setLoading={setLoading}
-        />
-      )}
+      {/* Courses Table Wrapper to allow mobile scroll */}
+      <div className="w-full overflow-x-auto">
+        {courses && (
+          <CoursesTable
+            courses={courses}
+            setCourses={setCourses}
+            loading={loading}
+            setLoading={setLoading}
+            
+          />
+        )}
+      </div>
     </div>
   );
 }
